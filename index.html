@@ -1,13 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  	<title>Arcade Game</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kalam:700">
 </head>
+
 <body>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
+
+	<header>
+		<h1>Arcade Game Project</h1>
+	</header>
+
+	<main>
+		<section class="overlay game__start">
+			<div class="container">
+				<h2>Arcade Game Start</h2>
+				<p>select player</p>
+				<div class="players">
+					<form id="group" class="radiogroup">
+						<div class="wrap__player">
+							<label>
+								<img class="players__images" src="img/char-boy.png" alt="Boy">
+								<input type="radio" class="players" name="players" id="char-boy" checked>
+							</label>
+						</div>
+						<div class="wrap__player">
+							<label>
+								<img class="players__images" src="img/char-cat-girl.png" alt="Cat Grirl">
+								<input type="radio" class="players" name="players" id="char-cat-girl">
+							</label>
+						</div>
+						<div class="wrap__player">
+							<label>
+								<img class="players__images" src="img/char-horn-girl.png" alt="Horn Girl">
+								<input type="radio" class="players" name="players" id="char-horn-girl">
+							</label>
+						</div>
+						<div class="wrap__player">
+							<label>
+								<img class="players__images" src="img/char-pink-girl.png" alt="Pink Girl">
+								<input type="radio" class="players" name="players" id="char-pink-girl">
+							</label>
+						</div>
+						<div class="wrap__player">
+							<label>
+								<img class="players__images" src="img/char-princess-girl.png" alt="Princess Girl">
+								<input type="radio" class="players" name="players" id="char-princess-girl">
+							</label>
+						</div>		
+					</form>			
+				</div>
+				<button class="btn btn__new__game" type="submit">New Game</button>	
+			</div>
+		</section>
+
+		<section class="overlay game__end hide">
+			<div class="container">
+				<h2>Arcade Game Message</h2>
+				<p>Results</p>
+				<p class="message"><span>Congratulations</span> You won!</p>
+
+				<p class="lives"><span>GAME END MESSAGE Remaining lives</span> 9 </p>
+				<p class="score"><span>GAME END MESSAGE Your bonus points</span> 0 </p>
+
+				<p class="new__game">Would you like to play again?</p>
+				<button class="btn btn__restart__game2" type="submit">New Game</button>
+			</div>
+		</section>
+
+		<section class="canvas__board hide">
+			<div class="container">
+
+				<p class="lives"><span>CANVAS Remaining lives</span> 9 </p>
+				<p class="score"><span>CANVAS Your bonus points</span> 0 </p>
+
+				<div class="canvas__container">
+				</div>
+				<button class="btn btn__restart__game" type="submit">Restart Game</button>
+			</div>
+		</section>
+
+	</main>
+
+	<footer>
+		<p>© 2018 by Claudia Wieser for Google/Udacity FEWD Nanodegree</p>
+	</footer>
+
+	
+	<script src="js/resources.js"></script>
+    <script src="js/app_radiogroup.js"></script>
     <script src="js/engine.js"></script>
+   
+
 </body>
 </html>

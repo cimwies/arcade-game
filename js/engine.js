@@ -23,10 +23,11 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
+    canvas.className = 'canvas__main',    
 
-    canvas.width = 505;
-    canvas.height = 606;
-    doc.body.appendChild(canvas);
+    canvas.width = game.width;
+    canvas.height = game.height;
+    document.querySelector('.canvas__container').appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -66,6 +67,7 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
+        //document.querySelector('#char-boy').focus();
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -79,7 +81,8 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+        countBonus();
     }
 
     /* This is called by the update function and loops through all of the
@@ -107,15 +110,15 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'img/water-block.png',   // Top row is water
+                'img/stone-block.png',   // Row 1 of 3 of stone
+                'img/stone-block.png',   // Row 2 of 3 of stone
+                'img/stone-block.png',   // Row 3 of 3 of stone
+                'img/grass-block.png',   // Row 1 of 2 of grass
+                'img/grass-block.png'    // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = Math.floor(game.height/game.colHeight)-1,
+            numCols = Math.floor(game.width/game.colWidth),
             row, col;
         
         // Before drawing, clear existing canvas
@@ -134,7 +137,7 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                ctx.drawImage(Resources.get(rowImages[row]), col * game.colWidth, row * game.colHeight);
             }
         }
 
@@ -146,14 +149,13 @@ var Engine = (function(global) {
      * on your enemy and player entities within app.js
      */
     function renderEntities() {
-        /* Loop through all of the objects within the allEnemies array and call
-         * the render function you have defined.
-         */
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
         player.render();
+        allBonus.forEach(function(bonus) {
+            bonus.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -169,11 +171,20 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/char-boy.png'
+        'img/stone-block.png',
+        'img/water-block.png',
+        'img/grass-block.png',
+        'img/enemy-bug.png',
+        'img/char-boy.png',
+        'img/char-cat-girl.png',
+        'img/char-horn-girl.png',
+        'img/char-pink-girl.png',        
+        'img/char-princess-girl.png',
+        'img/1.png',
+        'img/2.png',
+        'img/3.png',
+        'img/4.png',
+        'img/5.png'
     ]);
     Resources.onReady(init);
 
