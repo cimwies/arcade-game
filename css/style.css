@@ -89,14 +89,16 @@ input[type="radio" i] {
 	padding: 0.375rem 0.75rem;
 	color: #fff;
 	background-color: #4f80e1;
-	border-color: #4f80e1;
+	border: 1px solid #4f80e1;
 	font-size: 1rem;
 	border-radius: 0.25rem;
 }
 
 .btn:hover {
 	background-color: #4671c7;
+	border: 1px solid #4671c7;
 }
+
 p.intro {
 	padding: 0 2rem;
 	line-height: 50px;
