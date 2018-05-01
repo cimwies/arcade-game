@@ -14,14 +14,15 @@
 <body>
 
 	<header>
-		<h1>Arcade Game Project</h1>
+		<h1>My first Adventure</h1>
 	</header>
 
 	<main>
 		<section class="overlay game__start">
 			<div class="container">
-				<h2>Arcade Game Start</h2>
-				<p>select player</p>
+				<h2>Adventurous paths...</h2>
+				<p class="intro">Select your player <img src="img/players.png" alt="players">. Collect all items <img src="img/items.png" alt="items"> on your way to the riverside <img src="img/river.png" alt="riverside"> in order to get back home safely. But be aware of the bugs  <img src="img/enemies.png" alt="enemies"> ! They will pull you back!</p>
+				<p class="intro">Use the arrow keys to navigate your player. <img src="img/luck.png" alt="start game"> Good Luck! </p>
 				<div class="players">
 					<form id="group" class="radiogroup">
 						<div class="wrap__player">
@@ -56,30 +57,30 @@
 						</div>		
 					</form>			
 				</div>
-				<button class="btn btn__new__game" type="submit">New Game</button>	
+				<button class="btn btn__new__game" type="submit">Start Game</button>	
 			</div>
 		</section>
 
 		<section class="overlay game__end hide">
 			<div class="container">
-				<h2>Arcade Game Message</h2>
-				<p>Results</p>
+				<h2>Adventurous paths...</h2>
 				<p class="message"><span>Congratulations</span> You won!</p>
-
-				<p class="lives"><span>GAME END MESSAGE Remaining lives</span> 9 </p>
-				<p class="score"><span>GAME END MESSAGE Your bonus points</span> 0 </p>
-
-				<p class="new__game">Would you like to play again?</p>
+				<img class="players__message" src="img/char-princess-girl.png" alt="Player">
+				<div class="scoring">
+					<p class="lives"><span>GAME END MESSAGE Remaining lives</span> 9 </p>
+					<p class="score"><span>GAME END MESSAGE Your bonus points</span> 0 </p>
+				</div>
+				<p class="new__game">Play again?</p>
 				<button class="btn btn__restart__game2" type="submit">New Game</button>
 			</div>
 		</section>
 
 		<section class="canvas__board hide">
 			<div class="container">
-
-				<p class="lives"><span>CANVAS Remaining lives</span> 9 </p>
-				<p class="score"><span>CANVAS Your bonus points</span> 0 </p>
-
+				<div class="scoring">
+					<p class="lives"><span>CANVAS Remaining lives</span> 9 </p>
+					<p class="score"><span>CANVAS Your bonus points</span> 0 </p>
+				</div>
 				<div class="canvas__container">
 				</div>
 				<button class="btn btn__restart__game" type="submit">Restart Game</button>

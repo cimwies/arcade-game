@@ -8,6 +8,7 @@ const gameStart = document.querySelector('.game__start');
 const canvas = document.querySelector('.canvas__board');
 const gameEnd = document.querySelector('.game__end');
 //Scoring
+let playersMessage = document.querySelector('.players__message');
 let message = document.querySelector('.message');
 let lives = document.querySelectorAll('.lives');
 let score = document.querySelectorAll('.score');
@@ -53,14 +54,14 @@ Game.prototype.start = function() {
     player.choosePlayer();
     player.move [0, 0];
     createEnemies();
-    createBonus(3);
+    createBonus(3); // total of 3 bonus on canvas
     collisionCount = 0;
     checkCollisions();
     bonusCount = 0;
-    lives[0].innerText = 'remaining lives ' + (9-collisionCount);
-    lives[1].innerText = 'remaining lives ' + (9-collisionCount);  
-    score[0].innerText = 'You got ' + bonusCount + ' bonuspoints';
-    score[1].innerText = 'You got ' + bonusCount + ' bonuspoints';
+    lives[0].innerText = 'LIVES: ' + (3-collisionCount);
+    lives[1].innerText = 'LIVES: ' + (3-collisionCount);  
+    score[0].innerText = 'POINTS: ' + bonusCount;
+    score[1].innerText = 'POINTS: ' + bonusCount;
 };
 
 // Restart Game: reset all settings to original state, using button on canvas
@@ -73,6 +74,7 @@ Game.prototype.restart = function() {
     player.newxPos = player.xPos;
     this.isMoving = false;
     allEnemies = [];
+    allBonus = [];
     buttonStartGame();
 };
 
@@ -86,6 +88,7 @@ Game.prototype.restart2 = function() {
     player.newxPos = player.xPos;
     this.isMoving = false;
     allEnemies = [];
+    allBonus = [];
     buttonStartGame();
 };
 
@@ -109,32 +112,28 @@ const Enemy = function(xPos, yPos, speed, sprite) {
     this.xPos = xPos;
     this.yPos =  yPos;
     this.speed = speed;
-    this.sprite = 'img/enemy-bug.png';
+    this.sprite = 'img/' + sprite + '.png';
 };
 
 // create enemies and push them into the allEnemies array
 function createEnemies() {
-    const enemy_1 = new Enemy( -320, 141, 63, 'img/enemy-bug.png');
-    const enemy_2 = new Enemy( -200, 58, 145, 'img/enemy-bug.png');
-    const enemy_3 = new Enemy( -500,224, 227, 'img/enemy-bug.png');
+    const enemy_1 = new Enemy( -320, 141, 63, 'enemy-bug');
+    const enemy_2 = new Enemy( -200, 58, 145, 'enemy-bug');
+    const enemy_3 = new Enemy( -500, 224, 227, 'enemy-bug');
+    const enemy_4 = new Enemy( game.width + 100, 141, -120, 'enemy-bug-b');
 
-    allEnemies.push(enemy_1, enemy_2, enemy_3);
+    allEnemies.push(enemy_1, enemy_2, enemy_3, enemy_4);
 };
-
-function createBonus(size) {
-    for(let i =0;i<size;i++) {
-        const bonus = new Bonus();
-        allBonus.push(bonus);
-    };
-};
-
 
 // Update the enemy's position
 Enemy.prototype.update = function(dt) {
     this.xPos += this.speed * dt;
-    if (this.xPos > 505) {
-       this.xPos = -150; // enemy "runs" out of canvas and "returns" on left side
-    };
+    if (this.xPos > game.width && this.speed > 0) {
+       this.xPos =  - 150; // enemy "runs" out of canvas and "returns" again on left side
+    }
+    if (this.xPos < -100 && this.speed < 0) {
+       this.xPos =  game.width + 100; // enemy "runs" out of canvas and "returns" again on right side
+    }
 };
 
 // Draw the enemy on the screen
@@ -217,12 +216,11 @@ Player.prototype.checkMoves = function() {
 Player.prototype.doMoves = function() {
     if (this.newxPos != this.xPos || this.newyPos != this.yPos) {
         this.isMoving = true;
-        //console.log("Now Moving because:"+this.newxPos +"!="+ this.xPos +"||"+ this.newyPos +"!="+ this.yPos);
         if (player.xPos >= player.newxPos-5 && player.xPos <= player.newxPos + 5)
             this.xPos = this.newxPos;
         if (player.yPos >= player.newyPos-5 && player.yPos <= player.newyPos + 5)
             this.yPos = this.newyPos;
-        this.xPos += (this.newxPos-this.xPos)*0.2;
+        this.xPos += (this.newxPos-this.xPos)*0.2; // smooth moving
         this.yPos += (this.newyPos-this.yPos)*0.2;
     } else {
         if (this.isMoving)
@@ -244,9 +242,9 @@ Player.prototype.update = function() {
 * @constructor
 */
 const Bonus = function() {
-    this.xPos = game.colWidth * randomize() - 101;
-    this.yPos = game.colHeight * randomizeY() -10;
-    this.sprite = 'img/' + randomize() +'.png';
+    this.xPos = game.colWidth * randomize() - 101; // rows to put bouns in = 5
+    this.yPos = game.colHeight * randomizeY() - 10; // columns to put bonus in = 3
+    this.sprite = 'img/' + randomizeY() +'.png'; // elements to choose bonus from = 3
 };
 
 Bonus.prototype.render = function() {
@@ -255,15 +253,29 @@ Bonus.prototype.render = function() {
 
 function countBonus() {
     allBonus.forEach(function(bonus) {
-        if((player.yPos >= bonus.yPos - 15 && player.yPos <= bonus.yPos + 15)) {
-            if (player.xPos >= bonus.xPos - 45 && player.xPos <= bonus.xPos + 45) {
+        if((player.yPos >= bonus.yPos - 10 && player.yPos <= bonus.yPos + 10)) {
+            if (player.xPos >= bonus.xPos - 40 && player.xPos <= bonus.xPos + 40) {
                 bonusCount++;
-                score[0].innerText = 'You got ' + bonusCount + ' bonuspoints';
-                score[1].innerText = 'You got ' + bonusCount + ' bonuspoints';
-                allBonus.pop();
+                score[0].innerText = 'POINTS: ' + bonusCount;
+                score[1].innerText = 'POINTS: ' + bonusCount;
+                allBonus=allBonus.filter(function(boni) { // remove the bonus of the array where the player is on
+                    if ( boni.yPos === bonus.yPos && boni.xPos === bonus.xPos ) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
             };    
         };
     });
+};
+
+// if we got more bonus elements ( size ) this function creates the number of bonus instances
+function createBonus(size) {
+    for( let i = 0 ; i < size ; i++ ) {
+        const bonus = new Bonus();
+        allBonus.push(bonus);
+    };
 };
 
 // Collision Check
@@ -275,10 +287,10 @@ function checkCollisions() {
                 player.yPos = 400;
                 player.newxPos = 200;
                 player.newyPos = 400;
-                collisionCount += 1;
-                lives[0].innerText = 'remaining lives ' + (9-collisionCount);
-                lives[1].innerText = 'remaining lives ' + (9-collisionCount);
-                if (collisionCount === 9) {
+                collisionCount++;
+                lives[0].innerText = 'LIVES: ' + (3-collisionCount);
+                lives[1].innerText = 'LIVES: ' + (3-collisionCount);
+                if (collisionCount === 3) {
                     game.over();
                     message.innerText = 'OH NOOOOOOO....game over';
                 };
@@ -289,9 +301,10 @@ function checkCollisions() {
 
 // Player wins game
 function winGame() {
-    if (player.yPos <= -150) {
+    if (player.yPos <= -15 && bonusCount >= 3 ) {
         game.over();
-        message.innerText = 'JIPIII you Won the game!';
+        playersMessage.innerText = player.sprite;
+        message.innerText = 'Congratulations you won!';
     };
 };
 
