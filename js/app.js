@@ -303,7 +303,7 @@ function checkCollisions() {
 function winGame() {
     if (player.yPos <= -15 && bonusCount >= 3 ) {
         game.over();
-        playersMessage.innerText = player.sprite;
+        playersMessage.innerHTML = `<img src="${player.sprite}" alt="player">`;
         message.innerText = 'Congratulations you won!';
     };
 };
