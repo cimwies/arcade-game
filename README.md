@@ -24,25 +24,31 @@ To run this applicaton locally
 
 1. clone this repo
 
+```
 https://github.com/cimwies/arcade-game.git
+```
 
 2. Serve the application
 
+```
 By using the Chrome extension "Web Server for Chrome" for example
+```
 
 3. Open the application
 
+```
 http://127.0.0.1:8887
+```
 
 
 ### Sources
 
-* Google Font Kalam and Lato by https://fonts.google.com
-* Art assets and game engine by https://Udacity.com
+* [Kalam and Lato](https://fonts.google.com) - Google Fonts used
+* [Udacity](https://Udacity.com) - Art assets and game engine
 
 
 ### Open issues
 
 * Easy scaling up of the game
-* Put GemStones on unique canvas positions
+* GemStones on unique canvas positions
 
