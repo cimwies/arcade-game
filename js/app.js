@@ -17,6 +17,16 @@ let bonusCount = 0;
 //others
 let allEnemies = [];
 let allBonus = [];
+let allBonusFinal = [];
+//const bonusXpos = [ 0, colWidth, colWidth*2, colWidth*3, colWidth*4 ];
+//const bonusYpos = [ colHeight, colHeight*2, colHeight*3, colHeight*4, colHeight*5 ]; 
+
+// Test goal: gemstones on unique positions
+function shuffle(a, b) {
+    return Math.random() - 0.5;
+}
+
+
 
 function randomize() {
     return Math.floor(Math.random() * 5) + 1;
@@ -37,7 +47,7 @@ const Game = function() {
     this.colWidth = 101;
     this.colHeight = 83;
     this.xPos = 200;
-	this.yPos = 400;
+    this.yPos = 400;
     this.newxPos = 200;
     this.newyPos = 400;
     this.isMoving = false;
@@ -47,7 +57,7 @@ const game = new Game();
 
 // basic acions required to start the game
 Game.prototype.start = function() {
-	gameStart.classList.add('hide');
+    gameStart.classList.add('hide');
     canvas.classList.remove('hide');
     buttonRestartGame();
     keyOnGame();
@@ -66,7 +76,7 @@ Game.prototype.start = function() {
 
 // Restart Game: reset all settings to original state, using button on canvas
 Game.prototype.restart = function() {
-	gameStart.classList.remove('hide');
+    gameStart.classList.remove('hide');
     canvas.classList.add('hide');
     player.xPos = 200;
     player.yPos = 400;
@@ -123,7 +133,7 @@ function createEnemies() {
     const enemy_4 = new Enemy( game.width + 100, 141, -120, 'enemy-bug-b');
 
     allEnemies.push(enemy_1, enemy_2, enemy_3, enemy_4);
-};
+}
 
 // Update the enemy's position
 Enemy.prototype.update = function(dt) {
@@ -147,14 +157,14 @@ Enemy.prototype.render = function() {
 * @constructor
 */
 const Player = function() {
-	this.xPos = 200;
-	this.yPos = 400;
+    this.xPos = 200;
+    this.yPos = 400;
     this.newxPos = 200;
     this.newyPos = 400;
     this.isMoving = false;
-	this.move = [0, 0];
-	this.sprite = 'img/char-boy.png';
-};
+    this.move = [0, 0];
+    this.sprite = 'img/char-boy.png';
+}
 
 const player = new Player();
 
@@ -163,8 +173,8 @@ Player.prototype.choosePlayer = function() {
      for (let i = 0; i < players.length; i++) {
         if (players[i].checked) {
             this.sprite = 'img/' + players[i].id + '.png';
-        };
-    };  
+        }
+    }; 
 };
 
 // draw the player on the screen
@@ -198,7 +208,7 @@ Player.prototype.handleInput = function(direction) {
                 this.move[1] = -game.colHeight;
             }    
         }
-    };
+    }
 };
 
 // Update players move and reset
@@ -209,7 +219,7 @@ Player.prototype.checkMoves = function() {
         this.newxPos -= this.move[0];
         this.newyPos -= this.move[1];
         this.move = [0, 0];
-    };
+    }
 };
 
 // Linking a player move to a mouse click. Several quick mouse clicks followed by a series of player moves should be prevented ( 1 click = 1 move)
@@ -258,25 +268,27 @@ function countBonus() {
                 bonusCount++;
                 score[0].innerText = 'POINTS: ' + bonusCount;
                 score[1].innerText = 'POINTS: ' + bonusCount;
-                allBonus=allBonus.filter(function(boni) { // remove the bonus of the array where the player is on
+                allBonus=allBonus.filter(function(boni) { // remove the bonus where the player is on
                     if ( boni.yPos === bonus.yPos && boni.xPos === bonus.xPos ) {
                         return false;
                     } else {
                         return true;
                     }
                 });
-            };    
-        };
+            }    
+        }
     });
 };
 
 // if we got more bonus elements ( size ) this function creates the number of bonus instances
 function createBonus(size) {
-    for( let i = 0 ; i < size ; i++ ) {
-        const bonus = new Bonus();
-        allBonus.push(bonus);
-    };
+    for ( let i = 0 ; i < size ; i++ ) {
+        const bonus = new Bonus();  
+            allBonus.push(bonus);
+    }
 };
+   
+
 
 // Collision Check
 function checkCollisions() {
@@ -293,11 +305,11 @@ function checkCollisions() {
                 if (collisionCount === 3) {
                     game.over();
                     message.innerText = 'OH NOOOOOOO....game over';
-                };
-            };
-        };
+                }
+            }
+        }
     });
-};
+}
 
 // Player wins game
 function winGame() {
@@ -305,26 +317,26 @@ function winGame() {
         game.over();
         playersMessage.innerHTML = `<img src="${player.sprite}" alt="player">`;
         message.innerText = 'Congratulations you won!';
-    };
-};
+    }
+}
 
 
 // Event listener to choose a player and start a game
 function buttonStartGame() {
     btnStart.addEventListener('click', Game.prototype.start);
-};
+}
 
 buttonStartGame();
 
 // Event listener to reset a game
 function buttonRestartGame() {
     btnRestart.addEventListener('click', Game.prototype.restart);
-};
+}
 
 // Event listener to reset a game
 function buttonRestartGame2() {
     btnRestart2.addEventListener('click', Game.prototype.restart2);
-};
+}
 
 
 // This listens for key presses and sends the keys to your player.handleInput() method. You don't need to modify this.
@@ -338,4 +350,4 @@ function keyOnGame() {
         };
         player.handleInput(allowedKeys[e.keyCode]);
    });
-};    
+}    

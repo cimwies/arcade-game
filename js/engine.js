@@ -153,7 +153,7 @@ var Engine = (function(global) {
             enemy.render();
         });
         player.render();
-        allBonus.forEach(function(bonus) {
+        allBonusFinal.forEach(function(bonus) {
             bonus.render();
         });
     }
