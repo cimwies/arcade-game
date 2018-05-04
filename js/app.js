@@ -17,15 +17,11 @@ let bonusCount = 0;
 //others
 let allEnemies = [];
 let allBonus = [];
-let allBonusFinal = [];
-//const bonusXpos = [ 0, colWidth, colWidth*2, colWidth*3, colWidth*4 ];
-//const bonusYpos = [ colHeight, colHeight*2, colHeight*3, colHeight*4, colHeight*5 ]; 
 
 // Test goal: gemstones on unique positions
 function shuffle(a, b) {
     return Math.random() - 0.5;
 }
-
 
 
 function randomize() {
@@ -78,41 +74,33 @@ Game.prototype.start = function() {
 Game.prototype.restart = function() {
     gameStart.classList.remove('hide');
     canvas.classList.add('hide');
-    player.xPos = 200;
-    player.yPos = 400;
-    player.newyPos = player.yPos;
-    player.newxPos = player.xPos;
-    this.isMoving = false;
-    allEnemies = [];
-    allBonus = [];
-    buttonStartGame();
+    restartActions();
 };
 
 // Restart Game: reset all settings to original state , using button on final message
 Game.prototype.restart2 = function() {
     gameStart.classList.remove('hide');
     gameEnd.classList.add('hide');
-    player.xPos = 200;
-    player.yPos = 400;
-    player.newyPos = player.yPos;
-    player.newxPos = player.xPos;
-    this.isMoving = false;
-    allEnemies = [];
-    allBonus = [];
-    buttonStartGame();
+    restartActions();
 };
 
 // Game over: displaying the final messages and preparing for new game
 Game.prototype.over = function() {
     gameEnd.classList.remove('hide');
     canvas.classList.add('hide');
+    buttonRestartGame2();
+};
+
+function restartActions() {
     player.xPos = 200;
     player.yPos = 400;
     player.newyPos = player.yPos;
     player.newxPos = player.xPos;
-    buttonRestartGame2();
-};
-
+    //this.isMoving = false;
+    allEnemies = [];
+    allBonus = [];
+    buttonStartGame();
+}
 
 /**
 * @description ENEMY settings and functionalities
@@ -284,11 +272,9 @@ function countBonus() {
 function createBonus(size) {
     for ( let i = 0 ; i < size ; i++ ) {
         const bonus = new Bonus();  
-            allBonus.push(bonus);
+        allBonus.push(bonus);
     }
 };
-   
-
 
 // Collision Check
 function checkCollisions() {

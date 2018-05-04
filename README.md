@@ -2,7 +2,7 @@
 
 Project #4 of Udacity's Front-End Web Developer Nanodegree. 
 
-A live version can be seen here: https://cimwies.github.io/arcade-game/
+Live version: https://cimwies.github.io/arcade-game/
 
 
 ## Table of Contents
@@ -43,12 +43,12 @@ http://127.0.0.1:8887
 
 ### Sources
 
-* [Kalam and Lato](https://fonts.google.com) - Google Fonts used
+* [Kalam and Lato](https://fonts.google.com) - Google Fonts
 * [Udacity](https://Udacity.com) - Art assets and game engine
 
 
 ### Open issues
 
-* Easy scaling up of the game
+* Convenient scaling up of the game
 * GemStones on unique canvas positions
 
