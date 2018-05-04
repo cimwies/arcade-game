@@ -228,14 +228,14 @@ Player.prototype.update = function() {
 
 
 /**
-* @description PLAYER settings and functionalities
-* @constructor
+* @description  BONUS settings and functionalities
+* @constructor Bonus class
 */
 
 const Bonus = function(xPos, yPos) {
-    this.xPos =  xPos;
+    this.xPos = xPos;
     this.yPos = yPos;
-    this.sprite = 'img/' + randomize() +'.png'; // elements to choose bonus from = 3
+    this.sprite = 'img/' + randomize() +'.png';
 };
 
 Bonus.prototype.render = function() {
@@ -304,6 +304,7 @@ function checkCollisions() {
                 if (collisionCount === 3) {
                     game.over();
                     message.innerText = 'OH NOOOOOOO....game over';
+                    playersMessage.innerHTML = `<img src="${player.sprite}" alt="player">`;
                 }
             }
         }
