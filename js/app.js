@@ -17,25 +17,17 @@ let bonusCount = 0;
 //others
 let allEnemies = [];
 let allBonus = [];
-
-// Test goal: gemstones on unique positions
-function shuffle(a, b) {
-    return Math.random() - 0.5;
-}
+let positions = [];
 
 
 function randomize() {
-    return Math.floor(Math.random() * 5) + 1;
-}
-
-function randomizeY() {
-    return Math.floor(Math.random() * (3 - 1)) + 1;
+    return Math.floor(Math.random() * 3) + 1;
 }
 
 
 /**
 * @description GAME settings and functionalities
-* @constructor
+* @constructor Game class
 */
 const Game = function() {
     this.width = 505;
@@ -60,7 +52,8 @@ Game.prototype.start = function() {
     player.choosePlayer();
     player.move [0, 0];
     createEnemies();
-    createBonus(3); // total of 3 bonus on canvas
+    allBonusPositions(shuffle.array);
+    createBonus(3); // total of 3 GemStones on canvas
     collisionCount = 0;
     checkCollisions();
     bonusCount = 0;
@@ -70,21 +63,21 @@ Game.prototype.start = function() {
     score[1].innerText = 'POINTS: ' + bonusCount;
 };
 
-// Restart Game: reset all settings to original state, using button on canvas
+// Restart Game: reset all settings to original state, after clicking the button on the canvas
 Game.prototype.restart = function() {
     gameStart.classList.remove('hide');
     canvas.classList.add('hide');
     restartActions();
 };
 
-// Restart Game: reset all settings to original state , using button on final message
+// Restart Game: reset all settings to original state , after clicking the button on final message div
 Game.prototype.restart2 = function() {
     gameStart.classList.remove('hide');
     gameEnd.classList.add('hide');
     restartActions();
 };
 
-// Game over: displaying the final messages and preparing for new game
+// Game over: display the final messages and prepare for a new game
 Game.prototype.over = function() {
     gameEnd.classList.remove('hide');
     canvas.classList.add('hide');
@@ -96,7 +89,6 @@ function restartActions() {
     player.yPos = 400;
     player.newyPos = player.yPos;
     player.newxPos = player.xPos;
-    //this.isMoving = false;
     allEnemies = [];
     allBonus = [];
     buttonStartGame();
@@ -104,7 +96,7 @@ function restartActions() {
 
 /**
 * @description ENEMY settings and functionalities
-* @constructor
+* @constructor Enemy class
 */
 const Enemy = function(xPos, yPos, speed, sprite) {
     this.xPos = xPos;
@@ -142,7 +134,7 @@ Enemy.prototype.render = function() {
 
 /**
 * @description PLAYER settings and functionalities
-* @constructor
+* @constructor Player class
 */
 const Player = function() {
     this.xPos = 200;
@@ -239,10 +231,11 @@ Player.prototype.update = function() {
 * @description PLAYER settings and functionalities
 * @constructor
 */
-const Bonus = function() {
-    this.xPos = game.colWidth * randomize() - 101; // rows to put bouns in = 5
-    this.yPos = game.colHeight * randomizeY() - 10; // columns to put bonus in = 3
-    this.sprite = 'img/' + randomizeY() +'.png'; // elements to choose bonus from = 3
+
+const Bonus = function(xPos, yPos) {
+    this.xPos =  xPos;
+    this.yPos = yPos;
+    this.sprite = 'img/' + randomize() +'.png'; // elements to choose bonus from = 3
 };
 
 Bonus.prototype.render = function() {
@@ -266,15 +259,35 @@ function countBonus() {
             }    
         }
     });
-};
+}
 
-// if we got more bonus elements ( size ) this function creates the number of bonus instances
-function createBonus(size) {
-    for ( let i = 0 ; i < size ; i++ ) {
-        const bonus = new Bonus();  
-        allBonus.push(bonus);
+// generate all possible positions of the GemStones
+function allBonusPositions() {
+    for ( let i = 0; i < game.width; i+= game.colWidth ) {
+        for ( let j = game.colHeight-10; j < game.height - (4 * game.colHeight); j += game.colHeight ) {
+            positions.push([i,j]);
+        } 
     }
-};
+    shuffle(positions);
+}
+
+// shuffle function in order to create random positions of the GemStones
+function shuffle(array) {
+    for (let i = array.length-1; i > 0; i-- ) {
+        let b = Math.floor(Math.random() * (i + 1));
+        let a = array[i];
+        array[i] = array[b];
+        array[b] = a;
+    }
+    return array;
+}
+
+// create the defined amount of GemStones
+function createBonus( size) {
+    for ( let i = 0; i < size; i++ ) {
+        allBonus.push(new Bonus( positions[i][0], positions[i][1]));    
+    }
+}    
 
 // Collision Check
 function checkCollisions() {
@@ -306,7 +319,6 @@ function winGame() {
     }
 }
 
-
 // Event listener to choose a player and start a game
 function buttonStartGame() {
     btnStart.addEventListener('click', Game.prototype.start);
@@ -323,7 +335,6 @@ function buttonRestartGame() {
 function buttonRestartGame2() {
     btnRestart2.addEventListener('click', Game.prototype.restart2);
 }
-
 
 // This listens for key presses and sends the keys to your player.handleInput() method. You don't need to modify this.
 function keyOnGame() {

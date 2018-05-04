@@ -50,5 +50,4 @@ http://127.0.0.1:8887
 ### Open issues
 
 * Convenient scaling up of the game
-* GemStones on unique canvas positions
 
