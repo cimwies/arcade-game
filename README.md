@@ -15,7 +15,7 @@ Live version: https://cimwies.github.io/arcade-game/
 
 ### The Game
 
-In this game you have a Player and Enemies (Bugs). The goal of the player is to reach the water, with all GemStones collected but without colliding into any one of the enemies. The player can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. Once a the player collides with an enemy, the game is reset and the player moves back to the start square. Once the player reaches the water and at last 3 Points are earned, the game is won.
+In this game you have a Player and Enemies (Bugs). The goal of the player is to reach the water, with all GemStones collected but without colliding into any one of the enemies. The player can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. Once a the player collides with an enemy, the game is reset and the player moves back to the start square. The game is won if the player reaches the water and 3 Points are earned.
 
 
 ### Technical Information

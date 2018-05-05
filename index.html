@@ -18,85 +18,85 @@
 
 <body>
 
-	<header>
-		<h1>My first Adventure</h1>
-	</header>
+<header>
+	<h1>My first Adventure</h1>
+</header>
 
-	<main>
-		<section class="overlay game__start">
-			<div class="container">
-				<h2>Adventurous paths...</h2>
-				<p class="intro">Select your player <img src="img/players.png" alt="players">. Collect all items <img src="img/items.png" alt="items"> on your way to the riverside <img src="img/river.png" alt="riverside"> in order to get back home safely. But be aware of the bugs  <img src="img/enemies.png" alt="enemies"> ! They will pull you back!</p>
-				<p class="intro">Use the arrow keys to navigate your player. <img src="img/luck.png" alt="start game"> Good Luck! </p>
-				<div class="players">
-					<form id="group" class="radiogroup">
-						<div class="wrap__player">
-							<label>
-								<img class="players__images" src="img/char-boy.png" alt="Boy">
-								<input type="radio" class="players" name="players" id="char-boy" checked>
-							</label>
-						</div>
-						<div class="wrap__player">
-							<label>
-								<img class="players__images" src="img/char-cat-girl.png" alt="Cat Grirl">
-								<input type="radio" class="players" name="players" id="char-cat-girl">
-							</label>
-						</div>
-						<div class="wrap__player">
-							<label>
-								<img class="players__images" src="img/char-horn-girl.png" alt="Horn Girl">
-								<input type="radio" class="players" name="players" id="char-horn-girl">
-							</label>
-						</div>
-						<div class="wrap__player">
-							<label>
-								<img class="players__images" src="img/char-pink-girl.png" alt="Pink Girl">
-								<input type="radio" class="players" name="players" id="char-pink-girl">
-							</label>
-						</div>
-						<div class="wrap__player">
-							<label>
-								<img class="players__images" src="img/char-princess-girl.png" alt="Princess Girl">
-								<input type="radio" class="players" name="players" id="char-princess-girl">
-							</label>
-						</div>		
-					</form>			
-				</div>
-				<button class="btn btn__new__game" type="submit">Start Game</button>	
+<main>
+	<section class="overlay game__start">
+		<div class="container">
+			<h2>Adventurous paths...</h2>
+			<p class="intro">Select your player <img src="img/players.png" alt="players">. Collect all items <img src="img/items.png" alt="items"> on your way to the riverside <img src="img/river.png" alt="riverside"> in order to get back home safely. But be aware of the bugs  <img src="img/enemies.png" alt="enemies"> ! They will pull you back!</p>
+			<p class="intro">Use the arrow keys to navigate your player. <img src="img/luck.png" alt="start game"> Good Luck! </p>
+			<div class="players">
+				<form id="group" class="radiogroup">
+					<div class="wrap__player">
+						<label>
+							<img class="players__images" src="img/char-boy.png" alt="Boy">
+							<input type="radio" class="players" name="players" id="char-boy" checked>
+						</label>
+					</div>
+					<div class="wrap__player">
+						<label>
+							<img class="players__images" src="img/char-cat-girl.png" alt="Cat Grirl">
+							<input type="radio" class="players" name="players" id="char-cat-girl">
+						</label>
+					</div>
+					<div class="wrap__player">
+						<label>
+							<img class="players__images" src="img/char-horn-girl.png" alt="Horn Girl">
+							<input type="radio" class="players" name="players" id="char-horn-girl">
+						</label>
+					</div>
+					<div class="wrap__player">
+						<label>
+							<img class="players__images" src="img/char-pink-girl.png" alt="Pink Girl">
+							<input type="radio" class="players" name="players" id="char-pink-girl">
+						</label>
+					</div>
+					<div class="wrap__player">
+						<label>
+							<img class="players__images" src="img/char-princess-girl.png" alt="Princess Girl">
+							<input type="radio" class="players" name="players" id="char-princess-girl">
+						</label>
+					</div>		
+				</form>			
 			</div>
-		</section>
+			<button class="btn btn__new__game" type="submit">Start Game</button>	
+		</div>
+	</section>
 
-		<section class="overlay game__end hide">
-			<div class="container">
-				<h2>Adventurous paths...</h2>
-				<p class="message"><span>Congratulations</span> You won!</p>
-				<p class="players__message"><img src="img/char-princess-girl.png" alt="Player"></p>
-				<div class="scoring">
-					<p class="lives"><span>GAME END MESSAGE Remaining lives</span> 9 </p>
-					<p class="score"><span>GAME END MESSAGE Your bonus points</span> 0 </p>
-				</div>
-				<p class="new__game">Play again?</p>
-				<button class="btn btn__restart__game2" type="submit">New Game</button>
+	<section class="overlay game__end hide">
+		<div class="container">
+			<h2>Adventurous paths...</h2>
+			<p class="message"><span>Congratulations</span> You won!</p>
+			<p class="players__message"><img src="img/char-princess-girl.png" alt="Player"></p>
+			<div class="scoring">
+				<p class="lives"><span>GAME END MESSAGE Remaining lives</span> 9 </p>
+				<p class="score"><span>GAME END MESSAGE Your bonus points</span> 0 </p>
 			</div>
-		</section>
+			<p class="new__game">Play again?</p>
+			<button class="btn btn__restart__game2" type="submit">New Game</button>
+		</div>
+	</section>
 
-		<section class="canvas__board hide">
-			<div class="container">
-				<div class="scoring">
-					<p class="lives"><span>CANVAS Remaining lives</span> 9 </p>
-					<p class="score"><span>CANVAS Your bonus points</span> 0 </p>
-				</div>
-				<div class="canvas__container">
-				</div>
-				<button class="btn btn__restart__game" type="submit">Restart Game</button>
+	<section class="canvas__board hide">
+		<div class="container">
+			<div class="scoring">
+				<p class="lives"><span>CANVAS Remaining lives</span> 9 </p>
+				<p class="score"><span>CANVAS Your bonus points</span> 0 </p>
 			</div>
-		</section>
+			<div class="canvas__container">
+			</div>
+			<button class="btn btn__restart__game" type="submit">Restart Game</button>
+		</div>
+	</section>
 
-	</main>
+</main>
 
-	<footer>
-		<p>© 2018 by Claudia Wieser for Google/Udacity FEWD Nanodegree</p>
-	</footer>
+<footer>
+	<p>© 2018 created by Claudia Wieser for Google/Udacity FEWD Nanodegree</p>
+</footer>
 
 	
 <script src="js/resources.js"></script>
