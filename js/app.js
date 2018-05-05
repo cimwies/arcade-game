@@ -19,7 +19,6 @@ let allEnemies = [];
 let allBonus = [];
 let positions = [];
 
-
 function randomize() {
     return Math.floor(Math.random() * 3) + 1;
 }
@@ -150,11 +149,11 @@ const player = new Player();
 
 // select (change) the image of the player
 Player.prototype.choosePlayer = function() {
-     for (let i = 0; i < players.length; i++) {
+    for (let i = 0; i < players.length; i++) {
         if (players[i].checked) {
             this.sprite = 'img/' + players[i].id + '.png';
         }
-    }; 
+    } 
 };
 
 // draw the player on the screen
